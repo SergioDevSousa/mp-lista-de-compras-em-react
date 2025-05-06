@@ -1,9 +1,32 @@
+import { nanoid } from 'nanoid';
 import logo from './assets/logo.svg';
-import trash from './assets/trash.svg';
-import todo from './assets/todo.svg';
-import done from './assets/done.svg';
+import { useState } from 'react';
+import Item from './components/Item';
+
+export type Item = {
+  id: string;
+  nome: string;
+  quantidade: string;
+  comprado: boolean;
+}
+
+
 
 function App() {
+  const [items, setItems] = useState<Item[]>([
+    {id: nanoid(), nome: 'Leite Integral', quantidade: '3 caixas', comprado: false},
+    {id: nanoid(), nome: 'Maça', quantidade: '500g', comprado: true},
+    {id: nanoid(), nome: 'Café', quantidade: '1 pacote', comprado: true}
+
+  ]);
+
+  console.log(items);
+
+  const itemComprado = items.filter(item => item.comprado);
+  const itemNaoComprado = items.filter(item => !item.comprado);
+
+
+  
   return (
     <main className="max-w-2xl px-6 py-12 pb-20 mx-auto my-10 bg-white md:my-20 md:px-32 md:rounded-3xl">
       <header className="text-center">
@@ -42,63 +65,19 @@ function App() {
         </button>
       </form>
       <section className="mt-10 space-y-3 ">
-        <article className="flex w-full gap-4">
-          <img src={todo} alt="#" />
-          <div className="flex-1">
-            <p>Leite</p>
-            <p className="text-sm text-slate-400">3 Caixas</p>
-          </div>
-          <img
-            src={trash}
-            alt="ícone de lixeira"
-            className="justify-self-end"
-          />
-        </article>
-        <hr />
-        <article className="flex w-full gap-4">
-          <img src={todo} alt="#" />
-          <div className="flex-1">
-            <p>Maçã</p>
-            <p className="text-sm text-slate-400">500g</p>
-          </div>
-          <img
-            src={trash}
-            alt="ícone de lixeira"
-            className="justify-self-end"
-          />
-        </article>
-        <hr />
+        {itemNaoComprado.map(item => (
+          <Item item={item} />
+        ))}
+
+        
       </section>
       <section className="mt-16 space-y-3">
         <h2 className="mb-10 text-3xl text-center font-display">
           Itens já comprados
         </h2>
-        <article className="flex w-full gap-4">
-          <img src={done} alt="#" />
-          <div className="flex-1">
-            <p className="line-through text-slate-400">Leite</p>
-            <p className="text-sm line-through text-slate-400">3 Caixas</p>
-          </div>
-          <img
-            src={trash}
-            alt="ícone de lixeira"
-            className="justify-self-end"
-          />
-        </article>
-        <hr />
-        <article className="flex w-full gap-4">
-          <img src={done} alt="#" />
-          <div className="flex-1">
-            <p className="line-through text-slate-400">Maçã</p>
-            <p className="text-sm line-through text-slate-400">500g</p>
-          </div>
-          <img
-            src={trash}
-            alt="ícone de lixeira"
-            className="justify-self-end"
-          />
-        </article>
-        <hr />
+        {itemComprado.map(item => (
+          <Item item={item} />
+        ))}
       </section>
     </main>
   );
