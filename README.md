@@ -52,4 +52,4 @@ Temos uma sugestão de design no Figma. No entanto, sinta-se à vontade para cri
 
 ### Pré-requisitos
 
-- Conhecimento básico de React (JSX, componentes, props...)
+- Conhecimento básico de React (JSX, componentes, props)
