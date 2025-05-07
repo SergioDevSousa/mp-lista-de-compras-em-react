@@ -44,6 +44,20 @@ function App() {
     inputRef.current && inputRef.current.focus()
     // console.log(inpuRef.current);
   }
+  function handleClickComprado(id: string) {
+    const newItems = items.map(item => {
+      if (item.id === id){
+        item.comprado = !item.comprado;
+      }
+      return item;
+    })
+    setItems(newItems);
+
+  }
+  function handleClickDelete(id: string) {
+    const newItems = items.filter((item) => item.id !== id)
+    setItems(newItems);
+  }
 
   return (
     <main className="max-w-2xl px-6 py-12 pb-20 mx-auto my-10 bg-white md:my-20 md:px-32 md:rounded-3xl">
@@ -94,7 +108,7 @@ function App() {
 
       <section className="mt-10 space-y-3">
         {itemNaoComprado.map(item => (
-          <Item key={item.id} item={item} />
+          <Item handleClick={handleClickDelete} handleClickComprado={handleClickComprado} key={item.id} item={item} />
         ))}
       </section>
 
@@ -103,7 +117,7 @@ function App() {
           Itens já comprados
         </h2>
         {itemComprado.map(item => (
-          <Item key={item.id} item={item} />
+          <Item handleClick={handleClickDelete} handleClickComprado={handleClickComprado} key={item.id} item={item} />
         ))}
       </section>
     </main>
