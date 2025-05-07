@@ -1,9 +1,9 @@
-import type { Item } from '../App';
+import type { ItemType } from '../App';
 import todo from '../assets/todo.svg';
 import trash from '../assets/trash.svg';
 
 type ItemProps = {
-    item: Item;
+    item: ItemType;
 }
 
 export default function Item({item}: ItemProps) {
